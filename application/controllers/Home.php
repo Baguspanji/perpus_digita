@@ -9,6 +9,7 @@ class Home extends CI_Controller
         $this->load->model('Book_M', 'book');
         $this->load->model('Siswa_M', 'siswa');
         $this->load->model('Absensi_M', 'absensi');
+        $this->load->model('Kategori_M', 'kategori');
     }
 
 
@@ -23,11 +24,21 @@ class Home extends CI_Controller
 
     public function buku()
     {
-        $books = $this->book->get_data();
+        $kategoris = $this->kategori->get_data();
+
+        $get = $this->input->get();
+        if ($get) {
+            if ($get['kategori'] != null) {
+                $books = $this->book->get_kategori($get['kategori']);
+            }
+        } else {
+            $books = $this->book->get_data();
+        }
 
         $data = array(
             'title' => 'Daftar Buku',
             'books' => $books,
+            'kategoris' => $kategoris,
         );
 
         $this->template_f->view('frontend/home/buku', $data);
@@ -104,7 +115,6 @@ class Home extends CI_Controller
             $data = array(
                 'nis' => $post['nis'],
                 'keperluan' => $post['tujuan'],
-                'tanggal' => date('Y-m-d'),
             );
 
             if ($this->absensi->post_data($data)) {

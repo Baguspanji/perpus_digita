@@ -9,6 +9,7 @@ class Admin extends CI_Controller
         $this->load->model('Book_M', 'book');
         $this->load->model('Kategori_M', 'kategori');
         $this->load->model('Siswa_M', 'siswa');
+        $this->load->model('Absensi_M', 'absensi');
         $this->load->model('Global_M', 'global');
     }
 
@@ -209,6 +210,18 @@ class Admin extends CI_Controller
         );
 
         $this->template_b->view('backend/tamu/index', $data);
+    }
+    
+    public function absensi()
+    {
+        $absensis = $this->absensi->get_data();
+
+        $data = array(
+            'title' => 'Daftar Absensi',
+            'absensis' => $absensis,
+        );
+
+        $this->template_b->view('backend/absensi/index', $data);
     }
 
     public function siswa()

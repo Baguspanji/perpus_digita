@@ -24,7 +24,7 @@
 
 <div class="container text-white my-3">
     <h3>Selamat Datang</h3>
-    <p class="p-0 m-0">Selamat datang di halaman aplikasi perpus. Masuk dengan akun untuk melihat daftar bacaan, kelola peminjaman dan melihat buku yang telat dikembalikan.</p>
+    <p class="p-0 m-0">Selamat datang di halaman aplikasi perpus. Masuk dengan akun untuk melihat daftar bacaan.</p>
 </div>
 
 <script>

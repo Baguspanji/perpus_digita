@@ -194,24 +194,19 @@
                 setInterval(function() {
                     $('#bukuTamuAlert').collapse('hide');
                     $('[type="submit"]').removeAttr('disabled').html('Simpan<i class="fas fa-save ml-2"></i>');
-                }, 5000);
+                }, 2000);
             },
             success: function(s) {
                 if (s == 1) {
                     $('#bukuTamuAlert').collapse('show');
                     $('#bukuTamuAlert .alert').addClass('alert-success').removeClass('alert-danger').html('<h3>Sukses!</h3><p>Anda telah mengirimkan data, terimakasih telah mengisi kuisioner ini.</p>');
 
-                    $f[0].reset();
+                    // $f[0].reset();
 
                     setInterval(function() {
-                        $('#bukuTamuAlert').collapse('hide');
-                        $('[type="submit"]').removeAttr('disabled').html('Simpan<i class="fas fa-save ml-2"></i>');
-                    }, 5000);
+                        location.href = '<?= base_url() ?>/home/buku'
+                    }, 2000);
 
-                    $('#visitor').DataTable().destroy();
-                    $('#visitor').DataTable({
-                        'ajax': '<?= base_url('home/list_buku_tamu'); ?>',
-                    });
                 } else {
                     $('#bukuTamuAlert').collapse('show');
                     $('#bukuTamuAlert .alert').addClass('alert-danger').removeClass('alert-success').html('<h3>Gagal!</h3><p>Ups, nampaknya server sedang bermasalah. Coba lagi beberapa saat.</p>');
@@ -219,7 +214,7 @@
                     setInterval(function() {
                         $('#bukuTamuAlert').collapse('hide');
                         $('[type="submit"]').removeAttr('disabled').html('Simpan<i class="fas fa-save ml-2"></i>');
-                    }, 5000);
+                    }, 2000);
                 }
             }
         });
@@ -249,7 +244,7 @@
                 setInterval(function() {
                     $('#bukuSiswaAlert').collapse('hide');
                     $('[type="submit"]').removeAttr('disabled').html('Simpan<i class="fas fa-save ml-2"></i>');
-                }, 5000);
+                }, 2000);
             },
             success: function(s) {
                 var res = JSON.parse(s)
@@ -261,7 +256,7 @@
                     setInterval(function() {
                         $('#bukuSiswaAlert').collapse('hide');
                         $('[type="submit"]').removeAttr('disabled').html('Simpan<i class="fas fa-save ml-2"></i>');
-                    }, 5000);
+                    }, 2000);
                 } else {
 
                     $('#bukuSiswaAlert').collapse('show');
@@ -271,7 +266,7 @@
 
                     setInterval(function() {
                         location.href = '<?= base_url() ?>/home/buku'
-                    }, 5000);
+                    }, 2000);
                 }
             }
         });

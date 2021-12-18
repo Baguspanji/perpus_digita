@@ -30,6 +30,14 @@ class Book_M extends CI_Model
         $this->db->update('tbl_buku', $data);
         return true;
     }
+
+    public function get_kategori($id)
+    {
+        return $this->db->select('tbl_buku.*, tbl_kategori.kategori as kategori')->from('tbl_buku')
+            ->join('tbl_kategori', 'tbl_buku.kategori = tbl_kategori.id')
+            ->where('tbl_kategori.id', $id)
+            ->get()->result();
+    }
 }
 
 /* End of file Auth.php */

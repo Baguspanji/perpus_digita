@@ -61,6 +61,13 @@ $uri = $this->uri->segment(2);
                         <p>Pengunjung</p>
                     </a>
                 </li>
+                
+                <li class="nav-item <?= $uri == 'absensi' ? 'active' : '' ?>">
+                    <a href="<?= base_url() ?>admin/absensi">
+                        <i class="fas fa-th-list"></i>
+                        <p>Absensi</p>
+                    </a>
+                </li>
 
                 <li class="nav-item <?= $uri == 'buku' || $uri == 'post_buku' ? 'active' : '' ?>">
                     <a href="<?= base_url() ?>admin/buku">
