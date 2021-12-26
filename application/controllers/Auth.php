@@ -5,67 +5,30 @@ class Auth extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Check');
+		$this->load->model('Auth_M', 'auth');
 	}
 
 	function check_login()
 	{
-		if (!empty($_POST)) {
-			// var_dump($_POST);
-			$user 	 = htmlspecialchars($_POST['username']);
-			$pass	 = htmlspecialchars($_POST['password']);
-			$emailV	 = preg_match("/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/", $user);
-			// var_dump($emailV);
+		$post = $this->input->post();
+		if ($post) {
+			$cekdata = $this->auth->login($post['username'], $post['password']);
 
-			if (isset($emailV)) { // For Email Validation
-				$array['input'] = $user;
-				$data = $this->Check->email($array);
-
-				// var_dump($data->result(), $data->num_rows());
-
-				if ($data->num_rows() > 0) {
-
-					$user = $data->result()[0];
-					$pass = md5($pass);
-
-					// var_dump($pass, $user->password);
-
-					if ($pass === $user->password) {
-						echo 1;
-					} else {
-						echo 2;
-					}
-				} else {
-					echo 3;
-				}
-			} else { // For Username
-
-				$array['input'] = $user;
-				$data = $this->Check->user($array);
-
-				// var_dump($data->result(), $data->num_rows());
-
-				if ($data->num_rows() > 0) {
-
-					$user = $data->result()[0];
-					$pass = md5($pass);
-
-					// var_dump($pass, $user->password);
-
-					if ($pass === $user->password) {
-						$_SESSION['login']['username']   = $user;
-						$_SESSION['login']['last_login'] = strtotime(date('l, J F Y H.i.s'));
-
-						echo 1;
-					} else {
-						echo 2;
-					}
-				} else {
-					echo 3;
-				}
+			if ($cekdata == "admin") {
+				$this->session->set_flashdata('notifikasi', '<script>notifikasi("Anda Berhasil Login sebagai Admin", "success", "las la-exclamation")</script>');
+				redirect('admin');
+			} elseif ($cekdata == "pass false") {
+				$this->session->set_flashdata('notifikasi', '<script>notifikasi("Login Gagal, Password Salah", "danger", "las la-exclamation")</script>');
+				redirect('auth/login');
+			} elseif ($cekdata == "nonaktif") {
+				$this->session->set_flashdata('notifikasi', '<script>notifikasi("Login Gagal, akun dinonaktifkan", "danger", "las la-exclamation")</script>');
+				redirect('auth/login');
+			} else {
+				$this->session->set_flashdata('notifikasi', '<script>notifikasi("Login Gagal, Username tidak ditemukan", "danger", "las la-exclamation")</script>');
+				redirect('auth/login');
 			}
 		} else {
-			$this->load->view('errors/html/error_403');
+			$this->load->view('auth/login');
 		}
 	}
 
@@ -76,5 +39,11 @@ class Auth extends CI_Controller
 		} else {
 			$this->load->view('backend/auth/login');
 		}
+	}
+
+	function logout()
+	{
+		$this->session->sess_destroy();
+		redirect();
 	}
 }

@@ -6,15 +6,15 @@ if (!function_exists('allowed')) {
 		$role = $CI->session->userdata('role');
 		if ($role == null) {
 			$CI->session->set_flashdata('notifikasi', '<script>notifikasi("Anda harus login terlebih dahulu", "danger", "fa fa-exclamation")</script>');
-			redirect(base_url('admin/login'));
+			redirect(base_url('auth/login'));
 		} elseif ($role != $param) {
 			if ($param == 'admin') {
 				$CI->session->set_flashdata('notifikasi', '<script>notifikasi("Anda Harus Login Sebagai Admin", "danger", "fa fa-exclamation")</script>');
-				redirect(base_url('admin/login'));
+				redirect(base_url('auth/login'));
 			} elseif ($param == 'user') {
 				$CI->session->set_flashdata('notifikasi', '<script>notifikasi("Anda Harus Login Sebagai User", "danger", "fa fa-exclamation")</script>');
-				redirect(base_url('admin/login'));
-			} 
+				redirect(base_url('auth/login'));
+			}
 		}
 	}
 }

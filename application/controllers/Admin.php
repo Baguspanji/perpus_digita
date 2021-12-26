@@ -11,6 +11,8 @@ class Admin extends CI_Controller
         $this->load->model('Siswa_M', 'siswa');
         $this->load->model('Absensi_M', 'absensi');
         $this->load->model('Global_M', 'global');
+
+        allowed('admin');
     }
 
     public function index()

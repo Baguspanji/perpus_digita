@@ -65,7 +65,7 @@
                 <h3 class="text-center">Perpus Apps</h3>
                 <p class="text-center">Masuk dahulu</p>
                 <div class="card card-body shadow border-0">
-                    <form id="login">
+                    <form action="<?= base_url('auth/check_login'); ?>" method="POST">
 
                         <label for="username" class="mb-1">Nama Pengguna</label>
                         <input type="text" name="username" id="username" required="required" class="form-control" placeholder="Nama Pengguna" />
@@ -73,7 +73,7 @@
                         <label for="password" class="mb-1 mt-3">Kata Sandi</label>
                         <input id="password" type="password" required="required" name="password" class="form-control" placeholder="Kata Sandi" />
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-6 my-3">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="remember" value="forever" name="remember" />
@@ -83,13 +83,9 @@
                             <div class="col-6 my-3">
                                 <a class="text-right float-right" href="<?= base_url('auth/remember-me'); ?>">Reset Kata Sandi</a>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="row justify-content-center">
-                            <div class="text-center col-6">
-                                <button class="btn btn-primary" type="submit">Masuk<i class="fas fa-sign-in-alt ml-2"></i></button>
-                            </div>
-                        </div>
+                        <button class="btn btn-primary mt-3 w-100" type="submit">Masuk<i class="fas fa-sign-in-alt ml-2"></i></button>
 
                     </form>
                 </div>
@@ -118,83 +114,28 @@
 
     <!-- Addons -->
     <script href="<?= base_url(); ?>assets/frontend/vendor/fontawesome/js/all.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="<?= base_url() ?>assets/backend/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
     <script type="text/javascript" src="<?= base_url(); ?>assets/frontend/vendor/sweetalert/sweetalert2.all.min.js"></script>
     <script type="text/javascript" src="<?= base_url(); ?>assets/frontend/vendor/sweetalert/sweetalert2.min.js"></script>
 
-    <script type="text/javascript">
-        (function($) {
-            "use strict";
-
-            $('form#login').submit(function(s) {
-                s.preventDefault();
-
-                var $f = $(this);
-                var $b = $('[type="submit"]');
-
-                $.ajax({
-                    'url': '<?= base_url('auth/check-login'); ?>',
-                    'data': $f.serialize(),
-                    'method': 'POST',
-                    beforeSend: function() {
-                        $b.attr({
-                            'disabled': 'disabled',
-                        }).html('<i class="fas fa-spin fa-spinner mr-2"></i>Tunggu');
-
-                        $('input[type="text"], input[type="password"]').attr('readonly', 'readonly');
-                    },
-                    success: function(s) {
-                        if (s == 3) { // Jika pengguna gak ditemukan di database
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Login Gagal!',
-                                html: '<p>Nama pengguna atau email tidak terdaftar. Mohon periksa kembali ejaan anda.</p>'
-                            });
-
-                            $('input[type="text"], input[type="password"]').removeAttr('readonly');
-                            $b.removeAttr('disabled').html('Masuk<i class="fas fa-sign-in-alt ml-2"></i>');
-
-                        } else if (s == 2) { // Jika password salah
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Login Gagal!',
-                                html: '<p>Kata sandi tidak sesuai dengan kresidensial akun.</p>'
-                            });
-
-                            $('input[type="text"], input[type="password"]').removeAttr('readonly');
-                            $b.removeAttr('disabled').html('Masuk<i class="fas fa-sign-in-alt ml-2"></i>');
-
-                        } else if (s == 1) { // Jika benar
-
-                            $b.attr({
-                                'disabled': 'disabled',
-                                'class': 'btn btn-lg btn-primary',
-                            }).html('<i class="fas fa-spin fa-spinner mr-2"></i>Tunggu');
-
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Autentikasi Berhasil!',
-                                html: 'Akun anda sudah teridentifikasi, sistem akan mengarahkan anda ke halaman administrator dalam waktu 5 detik.',
-                                allowOutsideClick: false,
-                                timer: 3000,
-                                showCloseButton: false,
-                                showConfirmButton: false,
-                            });
-
-                            setInterval(function() {
-                                window.location.href = '<?= base_url("auth/check"); ?>';
-                            }, 5000);
-
-                        }
-                    },
-                    error: function() {
-
-                    }
-                });
+    <script>
+        function notifikasi(pesan, tipe, ico = '') {
+            $.notify({
+                // options
+                icon: ico,
+                message: pesan,
+            }, {
+                // settings
+                type: tipe,
+                z_index: 9999
             });
-        })(jQuery);
+        }
     </script>
+
+    <?php echo $this->session->flashdata('notifikasi'); ?>
 
 </body>
 
