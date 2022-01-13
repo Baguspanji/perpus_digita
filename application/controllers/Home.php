@@ -25,23 +25,40 @@ class Home extends CI_Controller
     public function buku()
     {
         $kategoris = $this->kategori->get_data();
+        $kategori = 0;
 
         $get = $this->input->get();
         if ($get) {
-            if ($get['kategori'] != null) {
+            if ($get['kategori'] != 0) {
+                $kategori = $get['kategori'];
+            }
+        }
+
+        $data = array(
+            'title' => 'Daftar Buku',
+            'kategoris' => $kategoris,
+            'kategori' => $kategori
+        );
+
+        $this->template_f->view('frontend/home/buku', $data);
+    }
+
+    public function get_buku()
+    {
+
+        $get = $this->input->get();
+        if ($get) {
+            if ($get['kategori'] != 0) {
                 $books = $this->book->get_kategori($get['kategori']);
+            } else {
+                $books = $this->book->get_data();
             }
         } else {
             $books = $this->book->get_data();
         }
 
-        $data = array(
-            'title' => 'Daftar Buku',
-            'books' => $books,
-            'kategoris' => $kategoris,
-        );
-
-        $this->template_f->view('frontend/home/buku', $data);
+        $data = array('data' => $books);
+        echo json_encode($data);
     }
 
     function buku_tamu()

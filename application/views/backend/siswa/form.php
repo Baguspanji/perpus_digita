@@ -135,7 +135,7 @@
     function addimage(image) {
         var value = '' +
             `<div class="parent path-image">` +
-            `    <img src="<?= base_url() ?>assets/images/${image}"` +
+            `    <img src="<?= base_url() ?>assets/siswa/${image}"` +
             '        class="img-thumbnail mx-1 my-1" alt="...">' +
             '    <input type="hidden"' +
             `        name="foto" value="${image}">` +
