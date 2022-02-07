@@ -41,6 +41,29 @@ class Admin extends CI_Controller
         $this->template_b->view('backend/book/index', $data);
     }
 
+    public function buku_status()
+    {
+        $uri = $this->uri->segment(3);
+        $status = 1;
+
+        $book = $this->book->get_id($uri);
+
+        if ($book['status'] == 1) {
+            $status = 0;
+        }
+
+        $post_book = $this->book->put_data(array(
+            'status' => $status,
+        ), $uri);
+
+        if ($post_book != null) {
+            $this->session->set_flashdata('notifikasi', '<script>notifikasi( "Data Berhasil disimpan!", "success", "fa fa-check") </script>');
+        } else {
+            $this->session->set_flashdata('notifikasi', '<script>notifikasi( "Data Gagal disimpan!", "danger", "fa fa-check") </script>');
+        }
+        redirect('admin/buku');
+    }
+
     public function post_buku()
     {
         $post = $this->input->post();
@@ -213,7 +236,7 @@ class Admin extends CI_Controller
 
         $this->template_b->view('backend/tamu/index', $data);
     }
-    
+
     public function absensi()
     {
         $absensis = $this->absensi->get_data();
@@ -236,6 +259,29 @@ class Admin extends CI_Controller
         );
 
         $this->template_b->view('backend/siswa/index', $data);
+    }
+
+    public function siswa_status()
+    {
+        $uri = $this->uri->segment(3);
+        $status = 1;
+
+        $siswa = $this->siswa->get_id($uri);
+
+        if ($siswa['status'] == 1) {
+            $status = 0;
+        }
+
+        $post_siswa = $this->siswa->put_data(array(
+            'status' => $status,
+        ), $uri);
+
+        if ($post_siswa != null) {
+            $this->session->set_flashdata('notifikasi', '<script>notifikasi( "Data Berhasil disimpan!", "success", "fa fa-check") </script>');
+        } else {
+            $this->session->set_flashdata('notifikasi', '<script>notifikasi( "Data Gagal disimpan!", "danger", "fa fa-check") </script>');
+        }
+        redirect('admin/siswa');
     }
 
     public function post_siswa()

@@ -35,6 +35,7 @@
                                             <th>Kategori</th>
                                             <th>Pengarang</th>
                                             <th>Tahun terbit</th>
+                                            <th>Tampil</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -56,6 +57,13 @@
                                                 <td><?= $value->kategori ?></td>
                                                 <td><?= $value->pengarang ?></td>
                                                 <td><?= $value->tahun_terbit ?></td>
+                                                <td>
+                                                    <?php if ($value->status == 1) : ?>
+                                                        <a href="<?= base_url() . 'admin/buku_status/' . $value->id ?>" class="btn btn-sm btn-success mt-2"><i class="fas fa-check"></i></a>
+                                                    <?php else :  ?>
+                                                        <a href="<?= base_url() . 'admin/buku_status/' . $value->id ?>" class="btn btn-sm btn-danger mt-2"><i class="fas fa-times"></i></a>
+                                                    <?php endif ?>
+                                                </td>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info mt-2"><i class="fas fa-eye"></i></a>
                                                     <a href="<?= base_url() . 'admin/post_buku/' . $value->id ?>" class="btn btn-sm btn-warning mt-2"><i class="fas fa-pen"></i></a>

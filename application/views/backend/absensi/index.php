@@ -38,7 +38,7 @@
                                                 <td><?= $value->nis ?></td>
                                                 <td><?= $value->nama ?></td>
                                                 <td><?= tanggal($value->tanggal) ?></td>
-                                                <td><?= $value->keperluan ?></td>
+                                                <td><?= ucwords($value->keperluan) ?></td>
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>

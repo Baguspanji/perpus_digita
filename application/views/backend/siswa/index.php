@@ -52,9 +52,9 @@
                                                 <td><?= $value->alamat ?></td>
                                                 <td><?= $value->kelas ?></td>
                                                 <?php if ($value->status == 1) {
-                                                    echo '<td><a href="#" class="btn btn-sm btn-success">Aktif</a></td>';
+                                                    echo '<td><a href="' . base_url() . 'admin/siswa_status/' . $value->id . '" class="btn btn-sm btn-success">Aktif</a></td>';
                                                 } else {
-                                                    echo '<td><a href="#" class="btn btn-sm btn-danger">Non-aktif</a></td>';
+                                                    echo '<td><a href="' . base_url() . 'admin/siswa_status/' . $value->id . '" class="btn btn-sm btn-danger">Non-aktif</a></td>';
                                                 } ?>
                                                 <td>
                                                     <a href="#" class="btn btn-sm btn-info mt-2"><i class="fas fa-eye"></i></a>

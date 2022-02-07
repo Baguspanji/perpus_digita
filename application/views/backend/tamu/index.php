@@ -38,9 +38,9 @@
                                                 <td width="20px"><?= ++$key ?></td>
                                                 <td><?= $value->nama_pengunjung ?></td>
                                                 <td><?= tanggal($value->waktu) ?></td>
-                                                <td><?= $value->tujuan ?></td>
+                                                <td><?= ucwords($value->tujuan) ?></td>
                                                 <td><?= $value->alamat ?></td>
-                                                <td><?= $value->jk ?></td>
+                                                <td><?= $value->jk == 'lk' ? 'Laki-laki' : 'Perempuan' ?></td>
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>
