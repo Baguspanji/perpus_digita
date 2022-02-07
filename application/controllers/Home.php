@@ -49,12 +49,12 @@ class Home extends CI_Controller
         $get = $this->input->get();
         if ($get) {
             if ($get['kategori'] != 0) {
-                $books = $this->book->get_kategori($get['kategori']);
+                $books = $this->book->get_kategori($get['kategori'], true);
             } else {
-                $books = $this->book->get_data();
+                $books = $this->book->get_data(true);
             }
         } else {
-            $books = $this->book->get_data();
+            $books = $this->book->get_data(true);
         }
 
         $data = array('data' => $books);
@@ -121,12 +121,12 @@ class Home extends CI_Controller
     {
         $post = $_POST;
 
-        $siswa = $this->siswa->get_where(['nis' => $post['nis']])->row_array();
+        $siswa = $this->siswa->get_where(['nis' => $post['nis'], 'status' => 1])->row_array();
 
         if ($siswa == null) {
             $res = [
                 'status' => 'error',
-                'message' => 'Nis/Siswa tidak di temukan'
+                'message' => 'Nis/Siswa tidak di temukan / Siswa tidak aktif'
             ];
         } else {
             $data = array(
