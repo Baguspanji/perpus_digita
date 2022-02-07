@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 04 Jan 2022 pada 05.32
+-- Waktu pembuatan: 07 Feb 2022 pada 11.04
 -- Versi server: 10.4.22-MariaDB
--- Versi PHP: 7.4.26
+-- Versi PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,20 +73,21 @@ CREATE TABLE `tbl_buku` (
   `pengarang` varchar(100) NOT NULL,
   `tahun_terbit` int(11) NOT NULL,
   `foto` varchar(100) NOT NULL,
-  `file` varchar(100) NOT NULL
+  `file` varchar(100) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `tbl_buku`
 --
 
-INSERT INTO `tbl_buku` (`id`, `nama_buku`, `kategori`, `pengarang`, `tahun_terbit`, `foto`, `file`) VALUES
-(1, 'Azab Sengketa lahan bangun masjid', '1', 'Muhammad Anshor', 2019, '', ''),
-(2, 'Saudagar', '1', 'Aldi taher', 2021, 'lemper3.jpg', 'cerita4.pdf'),
-(3, 'Bumi Saudagar', '2', 'Aldi taher', 2021, 'Images-circular_3x_DOdazHv_R.png', 'cerita5.pdf'),
-(4, 'Warga nestapa', '1', 'Aldi taher', 2020, 'fbb976dc334c0186765915d2b6aa1af7.jpeg', 'cerita6.pdf'),
-(5, 'Saudagar hore', '2', 'Aldi taher', 2021, 'user.png', 'cerita7.pdf'),
-(6, 'Saudagar', '2', 'Aldi taher', 2021, '', '');
+INSERT INTO `tbl_buku` (`id`, `nama_buku`, `kategori`, `pengarang`, `tahun_terbit`, `foto`, `file`, `status`) VALUES
+(1, 'Azab Sengketa lahan bangun masjid', '1', 'Muhammad Anshor', 2019, '', '', 1),
+(2, 'Saudagar', '1', 'Aldi taher', 2021, 'lemper3.jpg', 'cerita4.pdf', 1),
+(3, 'Bumi Saudagar', '2', 'Aldi taher', 2021, 'Images-circular_3x_DOdazHv_R.png', 'cerita5.pdf', 1),
+(4, 'Warga nestapa', '1', 'Aldi taher', 2020, 'fbb976dc334c0186765915d2b6aa1af7.jpeg', 'cerita6.pdf', 1),
+(5, 'Saudagar hore', '2', 'Aldi taher', 2021, 'user.png', 'cerita7.pdf', 1),
+(6, 'Saudagar', '2', 'Aldi taher', 2021, '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -132,7 +133,7 @@ CREATE TABLE `tbl_siswa` (
 --
 
 INSERT INTO `tbl_siswa` (`id`, `nis`, `nama_siswa`, `alamat`, `kelas`, `tempat_lahir`, `tanggal_lahir`, `password`, `foto`, `status`) VALUES
-(3, 1232441, 'Muhammad Shobirin', 'Tosari', 'VII A', 'Pasuruan', '2021-12-13', '$2y$11$D1HsbMjVSMxAFNP04IgvWOG2PcpKfsVlSaCXa01kzmAamuaNiAw0a', 'lemper.jpg', 1),
+(3, 1232441, 'Muhammad Shobirin', 'Tosari', 'VII A', 'Pasuruan', '2021-12-13', '$2y$11$D1HsbMjVSMxAFNP04IgvWOG2PcpKfsVlSaCXa01kzmAamuaNiAw0a', 'lemper.jpg', 0),
 (4, 1232221, 'Muhammad Firdaus', 'Gondang Wetan Pasuruan', 'VII A', 'Pasuruan', '2021-11-30', '$2y$11$4rTNeaW4Etxh.9tOUraDeesktmQ5jQpf1lCzufVnhvrFrNhFfcnjy', 'Images-circular_3x_DOdazHv_R.png', 1);
 
 -- --------------------------------------------------------
